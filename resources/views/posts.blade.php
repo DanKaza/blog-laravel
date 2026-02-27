@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     @foreach ($posts as $post)
         <article class="py-8 max-w-screen-md border-b border-gray-320">
-            <a href="/posts/{{ $post['id'] }}" class="hover:underline">
+            <a href="/posts/{{ $post['slug'] }}" class="hover:underline">
                 <h2>
                     {{ $post['title'] }}
                 </h2>
@@ -14,7 +14,7 @@
             <p class="text-base text-gray-500">
                 {{Str::limit($post['body'], 100) }}
             </p>
-            <a href="/posts/{{ $post['id'] }}" class="font-small text-blue-500 hover:underline">Lebih Lengkap &raquo;</a>
+            <a href="/posts/{{ $post['slug'] }}" class="font-small text-blue-500 hover:underline">Lebih Lengkap &raquo;</a>
 
         </article>
     @endforeach
