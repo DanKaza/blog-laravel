@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+// we will learn to use a class
+
 
 Route::get('/', function () {
     return view('home' , ['title' => 'Homepage']);
@@ -28,29 +28,9 @@ Route::get('/contact', function () {
 
 
 Route::get('/posts/{slug}', function($slug) {
-    $posts = [
-         [
-            'id' => 1,
-            'slug' => 'just-one',   
-            'title' => 'Just One',
-            'author' => 'Dammiyan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  Magni ex vitae'
-        ],
-        
-        [
-            'id' => 2,
-            'slug' => 'just-two',
-            'title' => 'Just Two',
-            'author' => 'Dammiyan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  Magni ex vitae suiqwnas jsdhsdapijn ajndasa'
-        ]
-    ];
+    
 
-    $post = Arr::first($posts, function ($post) use ($slug) {
-        return $post['slug'] == $slug;
-    });
+    $post = Post::find($slug);
      
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
@@ -60,23 +40,5 @@ Route::get('/posts/{slug}', function($slug) {
 
 
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog' ,'posts' => [
-        [
-            'id' => 1,
-            'slug' => 'just-one',
-            'title' => 'Just One',
-            'author' => 'Dammiyan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  Magni ex vitae'
-        ],
-        
-        [
-            'id' => 2,
-            'slug' => 'just-two',
-            'title' => 'Just Two',
-            'author' => 'Dammiyan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  Magni ex vitae suiqwnas jsdhsdapijn ajndasa'
-        ]
-    ]]);
+    return view('posts', ['title' => 'Blog' ,'posts' => Post::all()]);
 });
